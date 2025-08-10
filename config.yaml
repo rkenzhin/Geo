@@ -1,0 +1,52 @@
+# config.yaml
+paths:
+  models_dir: "models"
+  runs_dir: "runs"
+  data_dir: "/path/to/your/data/please/edit/me"
+
+data:
+  input_basenames: ["data_training_input_ext.bin"]
+  output_basenames: ["data_training_output_D_ext.bin", "data_training_output_R_ext.bin"]
+  # Image sizes
+  NX: 481
+  NY: 751
+  NZ: 2886 # 481 * 6 (6 cubes of data)
+  crop_size: 500 # The size to crop along the height (NY) dimension if is_crop is True.
+  # Dataset parameters
+  indexes_range: 10 #  Default is NZ
+  starting_index: 0 # Starting_index to load images
+  ending_index: 2886 # Ending_index to load images (default iz NZ)
+  val_ratio: 0.1 # Ratio of data for validation set
+  is_load_to_RAM: false # Load all selected data into RAM before training
+  use_second_data: false # Use the second dataset file pair (defined in output_basenames)
+  is_crop: false # Crop only training (not validation) images into smaller pathes along height (NY dimension) (requires --is_load_to_RAM True)
+  NY_crop: 751 # Vertical cropping size (up to this value from the top). Default is NY.
+  add_noise: false # Add Gaussian noise to input data during training
+  normalize_input: "normalize_input_to_max1" # Normalization for input data (from datasets.py)
+  normalize_output: "normalize_output_to_max1" # Normalization for output data (from datasets.py)
+
+model:
+  name: "UNet"
+  params:
+    n_channels: 1
+    n_classes: 1
+    bilinear: false
+
+training:
+  epochs: 1
+  batch_size: 1
+  optimizer: "Adam"
+  learning_rate: 1e-4
+  loss_function: "MSELoss"
+  validation_cadence: 1
+  log_images_cadence: 1
+  save_epoch_cadence: 10 
+  early_stop_patience: 50
+
+logging:
+  tb_prefix: "Unet"
+  comment: ""
+  log_2_images: false # Log 1 or 2 images to TensorBoard
+
+run_management:
+  save_config: true
