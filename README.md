@@ -145,4 +145,4 @@ The `inference.ipynb` notebook (or a similar `inference.py` script) demonstrates
 
 ## Contact
 
-[r.kenzhin@nsu.ru](mailto:r.kenzhin@nsu.ru)
+[r.kenzhin@nsu.ru](mailto:romankenzhin@gmail.com)
